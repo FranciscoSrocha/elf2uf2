@@ -79,32 +79,32 @@ elf2uf2 <input.elf> [OPTIONS]
 
 1. **ELF Parsing**
 
-   * Reads ELF ident and header
-   * Validates class (ELF32) and file type (EXEC)
-   * Iterates program headers
+    - Reads ELF ident and header
+    - Validates class (ELF32) and file type (EXEC)
+    - Iterates program headers
 
 2. **Segment Processing**
 
-   * Only `LOAD` segments are processed
-   * Segments with `file_size == 0` are skipped
-   * Target address is derived from `paddr`
-   * Data is split into fixed-sized UF2 blocks (default: 256 byte)
+    - Only `LOAD` segments are processed
+    - Segments with `file_size == 0` are skipped
+    - Target address is derived from `paddr`
+    - Data is split into fixed-sized UF2 blocks (default: 256 byte)
 
 3. **Memory Mapping**
 
-   * Segment data is mapped into aligned UF2 blocks
-   * Blocks are aligned to `payload_size`
-   * In case of overlapping segments the last one overwrites the previous one
+    - Segment data is mapped into aligned UF2 blocks
+    - Blocks are aligned to `payload_size`
+    - In case of overlapping segments the last one overwrites the previous one
 
 4. **UF2 Generation**
 
-   * Each block is written with:
-     * proper UF2 headers
-     * payload data
-     * padding
-   * Output is written atomically via a temporary file:
-     * The tool writes to a temporary file first: ``` uf2-tool.<name>.<pid>.tmp ```
-     * These are automatically cleaned up on startup.
+    - Each block is written with:
+        - proper UF2 headers
+        - payload data
+        - padding
+    - Output is written atomically via a temporary file:
+        - The tool writes to a temporary file first: ``` uf2-tool.<name>.<pid>.tmp ```
+        - These are automatically cleaned up on startup.
 
 ## Error Handling
 
@@ -116,15 +116,13 @@ The tool provides strict validation and will fail if:
 
 ## Limitations
 
-* Only supports **ELF32**
-* Only processes **`LOAD` segments**
-* Assumes target addresses fit into **u32 (UF2 address space)**
+- Only supports **ELF32**
+- Only processes **`LOAD` segments**
+- Assumes target addresses fit into **u32 (UF2 address space)**
 
 ## License
 
 MIT License
-
----
 
 ## Contributing
 
@@ -132,6 +130,6 @@ Contributions are welcome!
 
 If you find bugs or want features:
 
-* open an issue
-* or submit a PR
+- open an issue
+- or submit a PR
 

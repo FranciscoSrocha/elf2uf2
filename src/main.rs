@@ -3,8 +3,8 @@ use std::fs::{read_dir, remove_file};
 use std::path::Path;
 use tracing::{Level, debug, error, info, warn};
 
-use uf2_tool::cli::Cli;
-use uf2_tool::converter;
+use elf2uf2::cli::Cli;
+use elf2uf2::converter;
 
 fn init_logging(verbose: u8) {
     let lvl = match verbose {

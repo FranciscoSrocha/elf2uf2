@@ -2,6 +2,12 @@
 name = "elf2uf2"
 version = "0.1.0"
 edition = "2024"
+description = "Convert ELF firmware binaries into UF2 images for microcontrollers"
+license = "MIT"
+repository = "Convert ELF firmware binaries into UF2 images for microcontrollers"
+readme = "readme.md"
+keywords = ["elf", "uf2", "embedded", "firmware", "cli"]
+categories = ["command-line-utilities", "embedded"]
 
 [dependencies]
 clap = { version = "4.6.0", features = ["derive"] }
@@ -9,4 +15,8 @@ clap-num = "1.2.0"
 hex = "0.4.3"
 thiserror = "2.0.18"
 tracing = "0.1.44"
-tracing-subscriber = { version = "0.3.23", features = ["env-filter"]}
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+
+[[bin]]
+name = "elf2uf2"
+path = "src/main.rs"

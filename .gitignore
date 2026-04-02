@@ -4,3 +4,5 @@ test_files/
 *.elf
 *.tmp
 binaries/
+!examples/*.elf
+!examples/*.uf2

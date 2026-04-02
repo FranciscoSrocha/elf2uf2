@@ -2,3 +2,4 @@
 test_files/
 *.uf2
 *.elf
+binaries/

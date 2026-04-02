@@ -19,7 +19,7 @@ impl Encoding {
             Self::BigEndian => u16::from_be_bytes(bytes),
         }
     }
-    
+
     pub fn u32_from_bytes(self, bytes: [u8; 4]) -> u32 {
         match self {
             Self::LittleEndian => u32::from_le_bytes(bytes),

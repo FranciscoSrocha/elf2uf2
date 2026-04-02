@@ -26,7 +26,10 @@ impl Uf2 {
         if payload_size == 0 || payload_size > MAX_DATA_SIZE as u32 {
             return Err(Uf2Error::InvalidField {
                 field: "payload size",
-                kind: FieldErrorKind::OutOfRange { min: 1, max: MAX_DATA_SIZE as u32 },
+                kind: FieldErrorKind::OutOfRange {
+                    min: 1,
+                    max: MAX_DATA_SIZE as u32,
+                },
             });
         }
 
@@ -93,7 +96,7 @@ impl Uf2 {
         writer.append_bytes(data);
         writer.pad_to(BLOCK_SIZE - 4); // pad data until payloadsize + the rest of the uf2 block minus the magic end
         writer.append_u32(MAGIC_END);
-        
+
         debug_assert_eq!(writer.len(), BLOCK_SIZE);
 
         Ok(writer.into_bytes())

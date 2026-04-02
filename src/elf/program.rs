@@ -1,6 +1,6 @@
 use super::error::{FieldErrorKind, InconsistentKind, ParserError};
-use super::{Class, Elf};
 use super::helpers::to_usize;
+use super::{Class, Elf};
 use crate::binary::Reader;
 
 type ProgramHeaderParseFunction = fn(reader: &mut Reader) -> Result<ProgramHeader, ParserError>;

@@ -29,7 +29,7 @@ pub fn elf_to_uf2(
     // load elf
     let bytes = std::fs::read(&in_path)?;
     info!(size = %bytes.len(), "read ELF input file");
-    
+
     let elf_file = elf::Elf::parse(&bytes)?;
     info!(
         elf_class = %elf_file.ident.class,
@@ -71,7 +71,7 @@ pub fn elf_to_uf2(
             mem_size = ph.mem_size,
             "processing segment"
         );
-        
+
         if ph.segment_type != elf::SegmentType::Load || ph.file_size == 0 {
             debug!("skipping header");
             continue;
@@ -125,10 +125,7 @@ pub fn elf_to_uf2(
             addr_offset += len;
         }
 
-        info!(
-            block_count = blocks.len(),
-            "finished segment",
-        );
+        info!(block_count = blocks.len(), "finished segment",);
     }
 
     let block_count = u32::try_from(blocks.len()).map_err(|_| ConverterError::TooManyBlocks {
@@ -153,7 +150,7 @@ pub fn elf_to_uf2(
     );
     let tmp_path = out_path.with_file_name(tmp_name);
     let out_file = fs::File::create(&tmp_path)?;
-    
+
     info!(
         final_path = %out_path.display(),
         tmp_path = %tmp_path.display(),
@@ -165,11 +162,7 @@ pub fn elf_to_uf2(
     let mut writer = BufWriter::new(out_file);
 
     for (block_num, (addr, block_data)) in blocks.iter().enumerate() {
-        trace!(
-            target_addr = *addr,
-            block_num,
-            "Writing uf2 block"
-        );
+        trace!(target_addr = *addr, block_num, "Writing uf2 block");
 
         let block = uf2_block_generator.create_block(*addr, block_num as u32, block_data)?;
         writer.write_all(&block)?;
@@ -184,7 +177,7 @@ pub fn elf_to_uf2(
     );
 
     fs::rename(tmp_path, &out_path)?;
-    
+
     info!(
         blocks = block_count,
         total_bytes = block_count * uf2::BLOCK_SIZE as u32,

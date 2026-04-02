@@ -12,8 +12,5 @@ pub enum BinaryError {
     },
 
     #[error("cursor overflow: adding {added} to cursor position {position} caused overflow")]
-    CursorOverflow {
-        position: usize,
-        added: usize,
-    },
+    CursorOverflow { position: usize, added: usize },
 }
